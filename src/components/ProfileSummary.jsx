@@ -12,8 +12,8 @@ const ProfileSummary = ({ profile }) => {
 	} = profile;
 
 	return (
-		<Box display='flex' justifyContent='center'>
-			<Card sx={{ maxWidth: 400, p: 2 }}>
+		<Box justifyContent='center' width='600px' height='600px'>
+			<Card>
 				<CardContent>
 					{avatar && (
 						<Box display='flex' justifyContent='center' mb={2}>

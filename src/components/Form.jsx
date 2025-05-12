@@ -68,7 +68,7 @@ const Form = ({ uid, onComplete }) => {
 	};
 
 	return (
-		<Box sx={{ width: '100%', maxWidth: 600, mx: 'auto' }}>
+		<Box sx={{ maxWidth: 600, mx: 'auto' }}>
 			<Typography variant='h6' align='center' gutterBottom>
 				Complete Your Profile
 			</Typography>

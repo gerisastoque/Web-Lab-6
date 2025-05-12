@@ -10,7 +10,6 @@ const Dashboard = () => {
 	const [userData, setUserData] = useState(null);
 	const [loading, setLoading] = useState(true);
 
-	// aquí cargo el perfil desde Firestore
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -28,7 +27,12 @@ const Dashboard = () => {
 
 	if (loading) {
 		return (
-			<Box display='flex' justifyContent='center' mt={5}>
+			<Box
+				display='flex'
+				justifyContent='center'
+				alignItems='center'
+				height='100vh'
+			>
 				<CircularProgress />
 			</Box>
 		);
@@ -36,20 +40,33 @@ const Dashboard = () => {
 
 	if (!userData) {
 		return (
-			<Box mt={5} textAlign='center'>
-				<Typography variant='h6'>No se encontró información del perfil.</Typography>
+			<Box
+				display='flex'
+				justifyContent='center'
+				alignItems='center'
+				height='100vh'
+			>
+				<Typography variant='h6'>
+					No se encontró información del perfil.
+				</Typography>
 			</Box>
 		);
 	}
 
 	return (
-<Box mt={5}>
-	{userData.profileCompleted ? (
-		<ProfileSummary profile={userData} />
-	) : (
-		<Form uid={uid} onComplete={(updatedProfile) => setUserData(updatedProfile)} />
-	)}
-</Box>	);
+		<Box
+			display='flex'
+			justifyContent='center'
+			alignItems='center'
+			height='100vh'
+		>
+			{userData.profileCompleted ? (
+				<ProfileSummary profile={userData} />
+			) : (
+				<Form uid={uid} onComplete={(updatedProfile) => setUserData(updatedProfile)} />
+			)}
+		</Box>
+	);
 };
 
 export default Dashboard;

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../redux/authSlice';
 
 const LogIn = () => {
-	// here I store email and password
+	// store email and password
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -16,7 +16,7 @@ const LogIn = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	// here I update the values when typing
+	// update values on input change
 	const handleChange = (e) => {
 		setFormData({
 			...formData,
@@ -24,7 +24,7 @@ const LogIn = () => {
 		});
 	};
 
-	// here I try to log in
+	// try to log in
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setError('');
@@ -34,7 +34,7 @@ const LogIn = () => {
 		try {
 			const user = await loginUser(email, password);
 
-			// store data in Redux
+			// store user data in Redux
 			dispatch(loginSuccess({ uid: user.uid, email: user.email }));
 			localStorage.setItem('uid', user.uid);
 
@@ -46,47 +46,73 @@ const LogIn = () => {
 	};
 
 	return (
-		<Container maxWidth='xs'>
+		<Container maxWidth='xs'
+			sx={{
+			
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}>
 			<Box
 				sx={{
-					marginTop: 8,
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
+				padding: 4,
+					backgroundColor: '#fff',
+					boxShadow: 3, 
+					borderRadius: 5,
 				}}
 			>
-				<Typography component='h1' variant='h5'>
+				<Typography component='h1' variant='h5' fontWeight='bold' alignContent={'center'}>
 					Log In
 				</Typography>
 				<Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }}>
 					<TextField
-						fullWidth
-						required
-						label='Email Address'
-						name='email'
-						type='email'
-						value={formData.email}
-						onChange={handleChange}
-						margin='normal'
-					/>
-					<TextField
-						fullWidth
-						required
-						label='Password'
-						name='password'
-						type='password'
-						value={formData.password}
-						onChange={handleChange}
-						margin='normal'
-					/>
+	fullWidth
+	required
+	label='Email'
+	name='email'
+	type='email'
+	value={formData.email}
+	onChange={handleChange}
+	margin='normal'
+	InputProps={{
+		sx: {
+			borderRadius: '12px',
+		},
+	}}
+/>
+
+<TextField
+	fullWidth
+	required
+	label='Password'
+	name='password'
+	type='password'
+	value={formData.password}
+	onChange={handleChange}
+	margin='normal'
+	InputProps={{
+		sx: {
+			borderRadius: '12px',
+		},
+	}}
+/>
+
 					{error && (
 						<Typography color='error' sx={{ mt: 1 }}>
 							{error}
 						</Typography>
 					)}
-					<Button type='submit' fullWidth variant='contained' sx={{ mt: 2 }}>
-						Log In
-					</Button>
+					<Button
+	type='submit'
+	fullWidth
+	variant='contained'
+	sx={{
+		mt: 2,
+		borderRadius: '50px', // Esto sí lo toma
+	}}
+>
+	Log In
+</Button>
+
 				</Box>
 			</Box>
 		</Container>
